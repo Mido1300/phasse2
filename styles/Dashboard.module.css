@@ -1,31 +1,344 @@
 .container {
-  max-width: 1440px;
+  max-width: 1280px;
   margin: 0 auto;
   padding: 24px;
-  min-height: 100vh;
-  background-color: var(--bg-color);
-  transition: background-color 0.3s, color 0.3s;
 }
 
-.dark-mode .container {
-  background-color: var(--bg-dark);
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px;
+  margin-bottom: 40px;
+  border-bottom: 1px solid var(--border-color);
+  background: var(--card-bg);
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+}
+
+.header h1 {
+  color: var(--primary);
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.dark-mode .header h1 {
   color: white;
+}
+
+.headerControls {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.toggleContainer {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.toggleSwitch {
+  position: relative;
+  display: inline-block;
+  width: 56px;
+  height: 28px;
+}
+
+.toggleSwitch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggleSlider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--gray);
+  transition: 0.4s;
+  border-radius: 28px;
+  box-shadow: var(--shadow-sm);
+}
+
+.toggleSlider:before {
+  position: absolute;
+  content: '';
+  height: 20px;
+  width: 20px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+  box-shadow: var(--shadow-sm);
+}
+
+.toggleSwitch input:checked + .toggleSlider {
+  background: var(--gradient);
+}
+
+.toggleSwitch input:checked + .toggleSlider:before {
+  transform: translateX(28px);
+}
+
+.modeIcon {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.modeIcon svg {
+  margin-right: 8px;
+}
+
+.userProfile {
+  position: relative;
+}
+
+.userProfile img {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  cursor: pointer;
+  border: 2px solid var(--primary);
+  box-shadow: var(--shadow-sm);
+}
+
+.dropdown {
+  position: absolute;
+  top: 60px;
+  right: 0;
+  background-color: var(--card-bg);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+  padding: 8px;
+  z-index: 10;
+  min-width: 160px;
+}
+
+.dropdown a {
+  display: flex;
+  align-items: center;
+  padding: 12px;
+  text-decoration: none;
+  color: var(--text-color);
+  font-size: 14px;
+  border-radius: 6px;
+  transition: background-color 0.2s;
+  cursor: pointer;
+}
+
+.dropdown a:hover {
+  background-color: var(--border-color);
+}
+
+.dropdown a svg {
+  margin-right: 8px;
+}
+
+.searchFilterSection {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding: 16px;
+  background: var(--card-bg);
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+}
+
+.searchBox {
+  flex-grow: 1;
+  position: relative;
+  max-width: 400px;
+  background: var(--card-bg);
+  border-radius: 12px;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow 0.3s;
+}
+
+.searchBox:hover {
+  box-shadow: var(--shadow);
+}
+
+.searchBox input {
+  width: 100%;
+  padding: 14px 16px 14px 48px;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  background-color: transparent;
+  color: var(--text-color);
+  outline: none;
+}
+
+.searchBox input:focus {
+  box-shadow: 0 0 0 3px rgba(127, 29, 29, 0.1);
+}
+
+.searchBox input::placeholder {
+  color: var(--gray);
+  font-style: italic;
+}
+
+.searchIcon {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--primary);
+  font-size: 20px;
+  transition: color 0.2s;
+}
+
+.searchBox:hover .searchIcon {
+  color: var(--secondary);
+}
+
+.filterAddContainer {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.filterDropdown {
+  position: relative;
+}
+
+.filterBtn {
+  padding: 14px 24px;
+  background: var(--gradient);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: var(--shadow-sm);
+}
+
+.filterBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+}
+
+.filterBtn svg {
+  margin-left: 12px;
+  transition: transform 0.2s;
+}
+
+.filterBtn:hover svg {
+  transform: rotate(180deg);
+}
+
+.filterContent {
+  position: absolute;
+  right: 0;
+  top: 48px;
+  background-color: var(--card-bg);
+  min-width: 180px;
+  box-shadow: var(--shadow);
+  z-index: 1;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.filterContent a {
+  color: var(--text-color);
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  font-size: 14px;
+  transition: background-color 0.2s;
+  cursor: pointer;
+}
+
+.filterContent a:hover {
+  background-color: var(--border-color);
+}
+
+.filterContent a.active {
+  background: var(--gradient);
+  color: white;
+}
+
+.addUserBtn {
+  padding: 14px 24px;
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: var(--shadow-sm);
+}
+
+.addUserBtn svg {
+  margin-right: 8px;
+  font-size: 18px;
+  transition: transform 0.2s;
+}
+
+.addUserBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+}
+
+.addUserBtn:hover svg {
+  transform: scale(1.2);
 }
 
 .userGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
   gap: 24px;
-  margin-top: 40px;
+  margin-top: 32px;
 }
 
 @media (max-width: 768px) {
-  .container {
-    padding: 16px;
+  .searchFilterSection {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .searchBox {
+    max-width: none;
+    margin-bottom: 16px;
+  }
+
+  .filterAddContainer {
+    width: 100%;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .filterDropdown,
+  .addUserBtn {
+    width: 100%;
   }
 
   .userGrid {
     grid-template-columns: 1fr;
+  }
+
+  .headerControls {
+    flex-direction: column;
+    align-items: flex-end;
     gap: 16px;
   }
 }
