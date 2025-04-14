@@ -1,264 +1,258 @@
 .modal {
-    display: none;
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.6);
-    animation: fadeIn 0.3s;
-    box-shadow: var(--shadow-lg);
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.6);
+  animation: fadeIn 0.3s;
+  box-shadow: var(--shadow-lg);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
   }
-  
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
+  to {
+    opacity: 1;
   }
-  
-  .modalContent {
-    background-color: var(--card-bg);
-    margin: 5% auto;
-    padding: 32px;
-    border-radius: 16px;
-    box-shadow: var(--shadow-lg);
-    width: 90%;
-    max-width: 720px;
-    animation: slideIn 0.3s;
+}
+
+.modalContent {
+  background-color: var(--card-bg);
+  margin: 5% auto;
+  padding: 32px;
+  border-radius: 16px;
+  box-shadow: var(--shadow-lg);
+  width: 90%;
+  max-width: 720px;
+  animation: slideIn 0.3s;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(-100px);
+    opacity: 0;
   }
-  
-  @keyframes slideIn {
-    from {
-      transform: translateY(-100px);
-      opacity: 0;
-    }
-    to {
-      transform: translateY(0);
-      opacity: 1;
-    }
+  to {
+    transform: translateY(0);
+    opacity: 1;
   }
-  
-  .modalHeader {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 24px;
-    padding-bottom: 16px;
-    border-bottom: 1px solid var(--border-color);
-  }
-  
-  .modalTitle {
-    font-size: 28px;
-    color: var(--primary);
-    font-weight: 700;
-  }
-  
-  .close {
-    color: var(--gray);
-    font-size: 32px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: color 0.2s;
-  }
-  
-  .close:hover {
-    color: var(--text-color);
-  }
-  
+}
+
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.modalTitle {
+  font-size: 28px;
+  color: var(--primary);
+  font-weight: 700;
+}
+
+.close {
+  color: var(--gray);
+  font-size: 32px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.close:hover {
+  color: var(--text-color);
+}
+
+.formRow {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.formGroup {
+  flex: 1;
+  min-width: 220px;
+}
+
+.formGroup label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: var(--text-color);
+  font-size: 14px;
+}
+
+.formControl {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  font-size: 16px;
+  background-color: var(--card-bg);
+  color: var(--text-color);
+  outline: none;
+  box-shadow: var(--shadow-sm);
+}
+
+.formControl:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(127, 29, 29, 0.1);
+}
+
+.formCheck {
+  display: flex;
+  align-items: center;
+  margin-top: 16px;
+}
+
+.formCheck input {
+  width: 20px;
+  height: 20px;
+  margin-right: 12px;
+  accent-color: var(--primary);
+}
+
+.formCheck label {
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.modalFooter {
+  margin-top: 32px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+}
+
+.btn {
+  padding: 14px 28px;
+  font-size: 16px;
+  border-radius: 8px;
+  box-shadow: var(--shadow-sm);
+  border: none;
+  cursor: pointer;
+}
+
+.btnSuccess {
+  background: var(--gradient);
+  color: white;
+}
+
+.btnSecondary {
+  background-color: var(--gray);
+  color: white;
+}
+
+.required::after {
+  content: '*';
+  color: var(--danger);
+  margin-left: 4px;
+}
+
+.avatarUpload {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.avatarUpload img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 12px;
+  border: 2px solid var(--border-color);
+  box-shadow: var(--shadow-sm);
+}
+
+.avatarUpload input[type='file'] {
+  display: none;
+}
+
+.avatarUpload label {
+  padding: 10px 20px;
+  background: var(--gradient);
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: var(--shadow-sm);
+}
+
+.avatarUpload label:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+}
+
+.userViewModal .userHeader {
+  display: flex;
+  align-items: center;
+  margin-bottom: 32px;
+}
+
+.userViewModal .userAvatarLarge {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 24px;
+  border: 4px solid var(--primary);
+  box-shadow: var(--shadow-sm);
+}
+
+.userViewModal .userTitle h3 {
+  font-size: 28px;
+  margin-bottom: 8px;
+  color: var(--text-color);
+}
+
+.userViewModal .userTitle p {
+  font-size: 16px;
+  color: var(--gray);
+}
+
+.userDetailsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+.detailItem {
+  margin-bottom: 16px;
+}
+
+.detailLabel {
+  font-size: 14px;
+  color: var(--gray);
+  margin-bottom: 6px;
+}
+
+.detailValue {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+@media (max-width: 768px) {
   .formRow {
-    display: flex;
-    gap: 24px;
-    margin-bottom: 24px;
-    flex-wrap: wrap;
-  }
-  
-  .formGroup {
-    flex: 1;
-    min-width: 220px;
-  }
-  
-  .formGroup label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: 600;
-    color: var(--text-color);
-    font-size: 14px;
-  }
-  
-  .formControl {
-    width: 100%;
-    padding: 12px 16px;
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    font-size: 16px;
-    background-color: var(--card-bg);
-    color: var(--text-color);
-    outline: none;
-    box-shadow: var(--shadow-sm);
-  }
-  
-  .formControl:focus {
-    border-color: var(--primary);
-    box-shadow: 0 0 0 3px rgba(127, 29, 29, 0.1);
-  }
-  
-  .formCheck {
-    display: flex;
-    align-items: center;
-    margin-top: 16px;
-  }
-  
-  .formCheck input {
-    width: 20px;
-    height: 20px;
-    margin-right: 12px;
-    accent-color: var(--primary);
-  }
-  
-  .formCheck label {
-    font-weight: 500;
-    font-size: 14px;
-  }
-  
-  .modalFooter {
-    margin-top: 32px;
-    display: flex;
-    justify-content: flex-end;
+    flex-direction: column;
     gap: 16px;
   }
-  
-  .btn {
-    padding: 14px 28px;
-    font-size: 16px;
-    border-radius: 8px;
-    box-shadow: var(--shadow-sm);
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.2s, transform 0.2s, box-shadow 0.2s;
+
+  .modalContent {
+    width: 95%;
+    padding: 24px;
+    margin: 10% auto;
   }
-  
-  .btn:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow);
-  }
-  
-  .btnSuccess {
-    background: var(--gradient);
-    color: white;
-  }
-  
-  .btnSecondary {
-    background-color: var(--gray);
-    color: white;
-  }
-  
-  .required::after {
-    content: '*';
-    color: var(--danger);
-    margin-left: 4px;
-  }
-  
-  .avatarUpload {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 24px;
-  }
-  
-  .avatarUpload img {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-bottom: 12px;
-    border: 2px solid var(--border-color);
-    box-shadow: var(--shadow-sm);
-  }
-  
-  .avatarUpload input[type='file'] {
-    display: none;
-  }
-  
-  .avatarUpload label {
-    padding: 10px 20px;
-    background: var(--gradient);
-    color: white;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: 500;
-    transition: transform 0.2s, box-shadow 0.2s;
-    box-shadow: var(--shadow-sm);
-  }
-  
-  .avatarUpload label:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow);
-  }
-  
-  .userViewModal .userHeader {
-    display: flex;
-    align-items: center;
-    margin-bottom: 32px;
-  }
-  
-  .userViewModal .userAvatarLarge {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-right: 24px;
-    border: 4px solid var(--primary);
-    box-shadow: var(--shadow-sm);
-  }
-  
-  .userViewModal .userTitle h3 {
-    font-size: 28px;
-    margin-bottom: 8px;
-    color: var(--text-color);
-  }
-  
-  .userViewModal .userTitle p {
-    font-size: 16px;
-    color: var(--gray);
-  }
-  
-  .userDetailsGrid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 24px;
-  }
-  
-  .detailItem {
-    margin-bottom: 16px;
-  }
-  
-  .detailLabel {
-    font-size: 14px;
-    color: var(--gray);
-    margin-bottom: 6px;
-  }
-  
-  .detailValue {
-    font-size: 16px;
-    font-weight: 600;
-    color: var(--text-color);
-  }
-  
-  @media (max-width: 768px) {
-    .formRow {
-      flex-direction: column;
-      gap: 16px;
-    }
-  
-    .modalContent {
-      width: 95%;
-      padding: 24px;
-      margin: 10% auto;
-    }
-  }
+}
