@@ -1,12 +1,17 @@
-import { useState } from 'react';
-import styles from '../styles/Header.module.css';
+import { useContext } from 'react';
+import { useRouter } from 'next/router';
+import { DarkModeContext } from '../hooks/useDarkMode';
+import { FaSun, FaMoon, FaSignOutAlt } from 'react-icons/fa';
+import styles from '../styles/Dashboard.module.css';
 
-export default function Header({ toggleDarkMode, darkMode }) {
+export default function Header() {
+  const { darkMode, toggleDarkMode } = useContext(DarkModeContext);
+  const router = useRouter();
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const handleLogout = () => {
     localStorage.removeItem('isLoggedIn');
-    window.location.href = '/';
+    router.push('/');
   };
 
   return (
@@ -23,7 +28,7 @@ export default function Header({ toggleDarkMode, darkMode }) {
             <span className={styles.toggleSlider}></span>
           </label>
           <span className={styles.modeIcon}>
-            <i className={darkMode ? 'fas fa-moon' : 'fas fa-sun'}></i>
+            {darkMode ? <FaMoon /> : <FaSun />}
             {darkMode ? ' Dark Mode' : ' Light Mode'}
           </span>
         </div>
@@ -35,8 +40,8 @@ export default function Header({ toggleDarkMode, darkMode }) {
           />
           {dropdownOpen && (
             <div className={styles.dropdown}>
-              <a href="#" onClick={handleLogout}>
-                <i className="fas fa-sign-out-alt"></i> Logout
+              <a onClick={handleLogout}>
+                <FaSignOutAlt /> Logout
               </a>
             </div>
           )}
