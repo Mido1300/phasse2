@@ -1,16 +1,19 @@
 import { useState } from 'react';
+import { useRouter } from 'next/router';
 import styles from '../styles/LoginCard.module.css';
 
 export default function LoginCard() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(false);
+  const router = useRouter();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (username === 'admin' && password === '12345') {
       localStorage.setItem('isLoggedIn', 'true');
-      window.location.href = '/dashboard';
+      setError(false);
+      router.push('/dashboard');
     } else {
       setError(true);
     }
