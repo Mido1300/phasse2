@@ -1,8 +1,12 @@
 import '../styles/globals.css';
-import 'font-awesome/css/font-awesome.min.css';
+import { DarkModeProvider } from '../hooks/useDarkMode';
 
 function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />;
+  return (
+    <DarkModeProvider>
+      <Component {...pageProps} />
+    </DarkModeProvider>
+  );
 }
 
 export default MyApp;
