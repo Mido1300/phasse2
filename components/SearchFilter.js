@@ -1,11 +1,12 @@
 import { useState } from 'react';
-import styles from '../styles/SearchFilter.module.css';
+import { FaSearch, FaChevronDown, FaUserPlus } from 'react-icons/fa';
+import styles from '../styles/Dashboard.module.css';
 
-export default function SearchFilter({ onFilter, onSearch }) {
+export default function SearchFilter({ onSearch, onFilter }) {
   const [filterOpen, setFilterOpen] = useState(false);
   const [filterText, setFilterText] = useState('All Users');
 
-  const handleFilterClick = (filter, text) => {
+  const handleFilter = (filter, text) => {
     onFilter(filter);
     setFilterText(text);
     setFilterOpen(false);
@@ -14,7 +15,7 @@ export default function SearchFilter({ onFilter, onSearch }) {
   return (
     <div className={styles.searchFilterSection}>
       <div className={styles.searchBox}>
-        <i className={`fas fa-search ${styles.searchIcon}`}></i>
+        <FaSearch className={styles.searchIcon} />
         <input
           type="text"
           placeholder="Search users by name or email..."
@@ -28,27 +29,24 @@ export default function SearchFilter({ onFilter, onSearch }) {
             onClick={() => setFilterOpen(!filterOpen)}
           >
             <span>{filterText}</span>
-            <i className="fas fa-chevron-down"></i>
+            <FaChevronDown />
           </button>
           {filterOpen && (
             <div className={styles.filterContent}>
               <a
-                href="#"
-                onClick={() => handleFilterClick('all', 'All Users')}
+                onClick={() => handleFilter('all', 'All Users')}
                 className={filterText === 'All Users' ? styles.active : ''}
               >
                 All Users
               </a>
               <a
-                href="#"
-                onClick={() => handleFilterClick('active', 'Active Users')}
+                onClick={() => handleFilter('active', 'Active Users')}
                 className={filterText === 'Active Users' ? styles.active : ''}
               >
                 Active Users
               </a>
               <a
-                href="#"
-                onClick={() => handleFilterClick('inactive', 'Inactive Users')}
+                onClick={() => handleFilter('inactive', 'Inactive Users')}
                 className={filterText === 'Inactive Users' ? styles.active : ''}
               >
                 Inactive Users
@@ -58,11 +56,9 @@ export default function SearchFilter({ onFilter, onSearch }) {
         </div>
         <button
           className={styles.addUserBtn}
-          onClick={() =>
-            document.getElementById('add-user-modal').style.display = 'block'
-          }
+          onClick={() => document.getElementById('add-user-modal').style.display = 'block'}
         >
-          <i className="fas fa-user-plus"></i> Add User
+          <FaUserPlus /> Add User
         </button>
       </div>
     </div>
