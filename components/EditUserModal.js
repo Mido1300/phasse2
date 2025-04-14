@@ -1,10 +1,12 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
+import useUsers from '../hooks/useUsers';
 import styles from '../styles/Modal.module.css';
 
-export default function EditUserModal({ users, setUsers }) {
-  const [userId, setUserId] = useState(null);
+export default function EditUserModal() {
+  const { updateUser } = useUsers();
   const [avatar, setAvatar] = useState('https://via.placeholder.com/100');
   const [formData, setFormData] = useState({
+    id: '',
     name: '',
     email: '',
     role: '',
@@ -13,88 +15,26 @@ export default function EditUserModal({ users, setUsers }) {
     birthdate: '',
     department: '',
     position: '',
-    isActive: true,
+    isActive: false,
   });
 
-  // Populate form when modal is opened with user data
-  useEffect(() => {
-    const modal = document.getElementById('edit-user-modal');
-    if (modal && modal.style.display === 'block' && userId) {
-      const user = users.find((u) => u.id === userId);
-      if (user) {
-        setAvatar(user.avatar);
-        setFormData({
-          name: user.name,
-          email: user.email,
-          role: user.role,
-          country: user.country || '',
-          phone: user.phone || '',
-          birthdate: user.birthdate,
-          department: user.department || '',
-          position: user.position || '',
-          isActive: user.isActive,
-        });
-      }
-    }
-  }, [userId, users]);
-
-  const handleAvatarChange = (e) => {
+  const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (file) {
       const reader = new FileReader();
-      reader.onload = (e) => setAvatar(e.target.result);
+      reader.onload = () => setAvatar(reader.result);
       reader.readAsDataURL(file);
     }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const updatedUsers = users.map((user) =>
-      user.id === userId
-        ? {
-            ...user,
-            ...formData,
-            avatar,
-          }
-        : user
-    );
-    setUsers(updatedUsers);
+    updateUser({ ...formData, avatar });
     document.getElementById('edit-user-modal').style.display = 'none';
-    setFormData({
-      name: '',
-      email: '',
-      role: '',
-      country: '',
-      phone: '',
-      birthdate: '',
-      department: '',
-      position: '',
-      isActive: true,
-    });
-    setAvatar('https://via.placeholder.com/100');
-    setUserId(null);
   };
 
-  const openModal = (id) => {
-    setUserId(id);
-    document.getElementById('edit-user-modal').style.display = 'block';
-  };
-
-  const closeModal = () => {
+  const handleClose = () => {
     document.getElementById('edit-user-modal').style.display = 'none';
-    setFormData({
-      name: '',
-      email: '',
-      role: '',
-      country: '',
-      phone: '',
-      birthdate: '',
-      department: '',
-      position: '',
-      isActive: true,
-    });
-    setAvatar('https://via.placeholder.com/100');
-    setUserId(null);
   };
 
   return (
@@ -102,19 +42,24 @@ export default function EditUserModal({ users, setUsers }) {
       <div className={styles.modalContent}>
         <div className={styles.modalHeader}>
           <h2 className={styles.modalTitle}>Edit User</h2>
-          <span className={styles.close} onClick={closeModal}>
+          <span className={styles.close} onClick={handleClose}>
             ×
           </span>
         </div>
         <form onSubmit={handleSubmit}>
+          <input type="hidden" id="edit-user-id" value={formData.id} />
           <div className={styles.avatarUpload}>
-            <img src={avatar} alt="Avatar Preview" />
+            <img
+              src={avatar}
+              alt="Avatar Preview"
+              id="edit-avatar-preview"
+            />
             <label htmlFor="edit-avatar-upload">Change Profile Picture</label>
             <input
               type="file"
               id="edit-avatar-upload"
               accept="image/*"
-              onChange={handleAvatarChange}
+              onChange={handleFileChange}
             />
           </div>
           <div className={styles.formRow}>
@@ -265,7 +210,7 @@ export default function EditUserModal({ users, setUsers }) {
             <button
               type="button"
               className={`${styles.btn} ${styles.btnSecondary}`}
-              onClick={closeModal}
+              onClick={handleClose}
             >
               Cancel
             </button>
@@ -280,15 +225,4 @@ export default function EditUserModal({ users, setUsers }) {
       </div>
     </div>
   );
-}
-
-// Export a helper to trigger the modal (called from UserCard)
-export function openEditUserModal(id) {
-  const modal = document.getElementById('edit-user-modal');
-  if (modal) {
-    modal.style.display = 'block';
-    // Dispatch a custom event to notify the component of the user ID
-    const event = new CustomEvent('openEditModal', { detail: { id } });
-    window.dispatchEvent(event);
-  }
 }
